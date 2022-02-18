@@ -24,7 +24,7 @@ public class Postagem {
 	@Size(min = 5, max = 100, message = "O atributo título deve conter entre 5 e 100 caractéres")
 	private String titulo;
 	
-	@NotBlank(message = "O atributo título é obrigatório!")
+	@NotBlank(message = "O atributo texto é obrigatório!")
 	@Size(min = 5, max = 1000, message = "O atributo texto deve conter entre 5 e 1000 caractéres")
 	private String texto;
 	
