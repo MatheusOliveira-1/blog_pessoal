@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.generation.blogpessoal.model.Postagem;
 import com.generation.blogpessoal.repository.PostagemRepository;
+import com.generation.blogpessoal.repository.TemaRepository;
 
 @RestController // Indica classe controladora do tipo rest
 @RequestMapping("/postagens") // Indica o caminho padrão dessa classe controladora
@@ -27,6 +28,9 @@ public class PostagemController {
 	
 	@Autowired // Instancia o objeto automaticamente pelo Spring
 	private PostagemRepository postagemRepository; 
+	
+	@Autowired
+	private TemaRepository temaRepository; 
 	
 	@GetMapping
 	public ResponseEntity<List<Postagem>> getAll() { // Vai retornar uma lista do que está na classe postagem
@@ -51,17 +55,24 @@ public class PostagemController {
 	@PostMapping
 	public ResponseEntity<Postagem> postPostagem(@Valid @RequestBody Postagem postagem){
 		
-		return ResponseEntity.status(HttpStatus.CREATED).
-				body(postagemRepository.save(postagem));
-	}
+		if(temaRepository.existsById(postagem.getTema().getId()))
+			return ResponseEntity.status(HttpStatus.CREATED)
+			.body(postagemRepository.save(postagem));
+
+		return ResponseEntity.notFound().build();
+		}
+	
 	
 	@PutMapping 
 	    public ResponseEntity<Postagem> putPostagem(@Valid @RequestBody Postagem postagem) {
-	        
-	        return postagemRepository.findById(postagem.getId()) //procura pelo id 
-	                .map(resposta -> ResponseEntity.status(HttpStatus.OK)
-	                .body(postagemRepository.save(postagem))) 
-	                .orElse(ResponseEntity.notFound().build()); 
+		if(temaRepository.existsById(postagem.getTema().getId())) {
+			return postagemRepository.findById(postagem.getId()) 
+					.map(resposta -> ResponseEntity.status(HttpStatus.OK)
+					.body(postagemRepository.save(postagem))) 
+					.orElse(ResponseEntity.notFound().build()); 
+					
+		} 
+			return ResponseEntity.notFound().build();
 	    }
 								
 	
