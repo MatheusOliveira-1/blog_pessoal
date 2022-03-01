@@ -67,12 +67,15 @@ public class TemaController {
 	
 	@DeleteMapping ("/{id}")
 	public ResponseEntity<?> deleteTema (@PathVariable Long id){
-		return temaRepository.findById(id)
-				.map(resposta -> {
+		if (temaRepository.existsById(id)) {
+				temaRepository.findById(id).map(resposta -> {
 					temaRepository.deleteById(id);
 					return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-				})
-				.orElse(ResponseEntity.notFound().build());
+				});
+		}
+		
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "O Id inserido não corresponde a nenhum tema!");
+		
 	}
 
 }
