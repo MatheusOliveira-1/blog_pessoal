@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.blogpessoal.model.Tema;
 import com.generation.blogpessoal.repository.TemaRepository;
@@ -36,6 +37,9 @@ public class TemaController {
 	
 	@PostMapping
 	public ResponseEntity<Tema> postTema(@Valid @RequestBody Tema tema){
+		if (temaRepository.existsByDescricaoContainingIgnoreCase(tema.getDescricao())) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Este tema já existe!", null);
+		}
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(temaRepository.save(tema));
 	}
