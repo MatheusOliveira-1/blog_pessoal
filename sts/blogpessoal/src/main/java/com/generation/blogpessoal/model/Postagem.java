@@ -38,6 +38,10 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
 	
+	@ManyToOne
+	@JsonIgnoreProperties("usuario")
+	private Usuario usuario;
+	
 	//Não é ncessário criar o método Contrutor
 	
 	//Na classe Model é obrigatório criar os GETs e SETs dos atributos.
@@ -71,6 +75,12 @@ public class Postagem {
 	}
 	public void setTema(Tema tema) {
 		this.tema = tema;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 
