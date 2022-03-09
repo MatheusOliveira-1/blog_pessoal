@@ -24,7 +24,7 @@ public class Tema {
 	@NotBlank (message = "O atributo é obrigatório")
 	private String descricao;
 								//Cascade informa que se o tema for apagado todas as postagens são apagadas
-	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL) // mapped dá um nome ao relacionamento
+	@OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE) // mapped dá um nome ao relacionamento
 	@JsonIgnoreProperties("tema")
 	private List <Postagem> postagem;
 
