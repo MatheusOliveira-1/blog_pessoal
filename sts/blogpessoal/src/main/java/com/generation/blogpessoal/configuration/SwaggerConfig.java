@@ -27,12 +27,12 @@ import io.swagger.v3.oas.models.responses.ApiResponses;
 						.name("Generation Brasil")
 						.url("https://brazil.generation.org/"))
 					.contact(new Contact()
-						.name("Conteudo Generation")
-						.url("https://github.com/conteudoGeneration")
-						.email("conteudogeneration@gmail.com")))
+						.name("Matheus Oliveira")
+						.url("https://linktr.ee/mo.dev")
+						.email("mhs.oliveira1996@gmail.com")))
 					.externalDocs(new ExternalDocumentation()
 						.description("Github")
-						.url("https://github.com/conteudoGeneration/"));
+						.url("https://github.com/MatheusOliveira-1/"));
 		}
 
 		@Bean
