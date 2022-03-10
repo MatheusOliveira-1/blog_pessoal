@@ -74,6 +74,11 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.6.3</version>
 		</dependency>
+		<!-- Dependência PostgreSQL -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency> 
 	</dependencies>
 
 	<build>
